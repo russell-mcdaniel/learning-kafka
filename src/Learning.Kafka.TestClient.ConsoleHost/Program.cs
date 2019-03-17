@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Confluent.Kafka;
 using Confluent.Kafka.Admin;
 
-namespace Learning.Kafka.Producer.ConsoleHost
+namespace Learning.Kafka.TestClient.ConsoleHost
 {
     class Program
     {
