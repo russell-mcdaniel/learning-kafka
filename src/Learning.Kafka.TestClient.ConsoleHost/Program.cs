@@ -24,7 +24,7 @@ namespace Learning.Kafka.TestClient.ConsoleHost
         {
             var config = new AdminClientConfig() { BootstrapServers = _server };
 
-            var topic = new TopicSpecification() { Name = _topicName };
+            var topic = new TopicSpecification() { Name = _topicName, NumPartitions = 1, ReplicationFactor = 1 };
             var topics = new List<TopicSpecification>() { topic };
 
             using (var client = new AdminClient(config))
