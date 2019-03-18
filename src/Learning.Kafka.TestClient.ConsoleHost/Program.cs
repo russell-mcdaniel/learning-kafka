@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CommandLine;
 using Learning.Kafka.TestClient.ConsoleHost.Broker;
 
@@ -16,7 +17,7 @@ namespace Learning.Kafka.TestClient.ConsoleHost
                         (ManageOptions options) => Run(options),
                         (ProduceOptions options) => Run(options),
                         (ConsumeOptions options) => Run(options),
-                        _ => 1);
+                        errors => DisplayErrors(errors));
             }
 
             if (System.Diagnostics.Debugger.IsAttached)
@@ -24,6 +25,21 @@ namespace Learning.Kafka.TestClient.ConsoleHost
                 Console.WriteLine("Press Enter to exit.");
                 Console.ReadLine();
             }
+        }
+
+        static int DisplayErrors(IEnumerable<Error> errors)
+        {
+            Console.WriteLine("The following command line parsing errors occurred:");
+            Console.WriteLine();
+
+            foreach (var error in errors)
+            {
+                Console.WriteLine(error.ToString());
+            }
+
+            Console.WriteLine();
+
+            return 1;
         }
 
         static int Run(OptionsBase options)
