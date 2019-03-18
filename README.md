@@ -25,6 +25,12 @@ To start a local Kafka broker:
 * Change to the `/broker` directory.
 * Run `docker-compose up` command.
 
+To access Kafka Manager:
+
+* Open a browser and navigate to http://localhost:9000/.
+* If not already configured, create an entry for the local development cluster.
+  * Specify `zookeeper:2181` as the host and select the latest Kafka version.
+
 To run the test client:
 
 * TBD
