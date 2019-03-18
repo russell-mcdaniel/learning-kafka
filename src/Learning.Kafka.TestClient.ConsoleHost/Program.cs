@@ -13,9 +13,9 @@ namespace Learning.Kafka.TestClient.ConsoleHost
             {
                 var result = parser.ParseArguments<ManageOptions, ProduceOptions, ConsumeOptions>(args)
                     .MapResult(
-                        (ManageOptions options) => RunManage(options),
-                        (ProduceOptions options) => RunProduce(options),
-                        (ConsumeOptions options) => RunConsume(options),
+                        (ManageOptions options) => Run(options),
+                        (ProduceOptions options) => Run(options),
+                        (ConsumeOptions options) => Run(options),
                         _ => 1);
             }
 
@@ -26,19 +26,39 @@ namespace Learning.Kafka.TestClient.ConsoleHost
             }
         }
 
-        static int RunManage(ManageOptions options)
+        static int Run(OptionsBase options)
         {
-            return ManageProcessor.Execute(options);
-        }
+            try
+            {
+                switch (options)
+                {
+                    case ManageOptions m:
+                        ManageProcessor.Execute(m);
+                        break;
 
-        static int RunProduce(ProduceOptions options)
-        {
-            return 0;
-        }
+                    case ProduceOptions p:
+                        ProduceProcessor.Execute(p);
+                        break;
 
-        static int RunConsume(ConsumeOptions options)
-        {
-            return 0;
+                    case ConsumeOptions c:
+                        ConsumeProcessor.Execute(c);
+                        break;
+
+                    case null:
+                        throw new ArgumentNullException(nameof(options));
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(options), options, "Unknown options type.");
+                }
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+
+                return 1;
+            }
         }
     }
 }
