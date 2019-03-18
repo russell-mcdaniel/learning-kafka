@@ -1,72 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Confluent.Kafka;
-using Confluent.Kafka.Admin;
+using CommandLine;
+using Learning.Kafka.TestClient.ConsoleHost.Broker;
 
 namespace Learning.Kafka.TestClient.ConsoleHost
 {
     class Program
     {
-        private static string _server = "kafka:9092";   // "zookeeper:2181";
-        private static string _topicName = "test-topic";
-
         static void Main(string[] args)
         {
-            if (!TopicExists(_topicName))
-                CreateTopic();
-
-            ProduceMessage();
-        }
-
-        private static void CreateTopic()
-        {
-            var config = new AdminClientConfig() { BootstrapServers = _server };
-
-            var topic = new TopicSpecification() { Name = _topicName, NumPartitions = 1, ReplicationFactor = 1 };
-            var topics = new List<TopicSpecification>() { topic };
-
-            using (var client = new AdminClient(config))
+            // Configure parser with expected case-sensitivity behavior for the Windows environment.
+            using (var parser = new Parser(settings => { settings.CaseInsensitiveEnumValues = true; }))
             {
-                var topicTask = client.CreateTopicsAsync(topics) as Task<List<CreateTopicExceptionResult>>;
-                var topicResults = topicTask.Result;
+                var result = parser.ParseArguments<ManageOptions, ProduceOptions, ConsumeOptions>(args)
+                    .MapResult(
+                        (ManageOptions options) => RunManage(options),
+                        (ProduceOptions options) => RunProduce(options),
+                        (ConsumeOptions options) => RunConsume(options),
+                        _ => 1);
+            }
+
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                Console.WriteLine("Press Enter to exit.");
+                Console.ReadLine();
             }
         }
 
-        private static void ProduceMessage()
+        static int RunManage(ManageOptions options)
         {
-            var prodConfig = new ProducerConfig() { BootstrapServers = _server };
-
-            using (var producer = new Producer<byte[], byte[]>(prodConfig))
-            {
-                var messageText = "The quick brown fox jumps over the lazy dog.";
-                var messageValue = Encoding.UTF8.GetBytes(messageText);
-                var message = new Message<byte[], byte[]>() { Value = messageValue };
-
-                var produceTask = producer.ProduceAsync(_topicName, message);
-                var produceReport = produceTask.Result;
-            }
+            return ManageProcessor.Execute(options);
         }
 
-        private static bool TopicExists(string topicName)
+        static int RunProduce(ProduceOptions options)
         {
-            var config = new AdminClientConfig() { BootstrapServers = _server };
+            return 0;
+        }
 
-            using (var client = new AdminClient(config))
-            {
-                // Which call auto-creates the topic?
-                var metaBroker = client.GetMetadata(TimeSpan.FromSeconds(3));
-                var metaTopic = client.GetMetadata(_topicName, TimeSpan.FromSeconds(3));    // Auto-creates topic. Broker setting?
-
-                var resources = new List<ConfigResource>() { new ConfigResource() { Name = _topicName, Type = ResourceType.Topic } };
-                var options = new DescribeConfigsOptions() { RequestTimeout = TimeSpan.FromSeconds(3) };
-
-                var configTask = client.DescribeConfigsAsync(resources, options);
-                var configResults = configTask.Result;
-            }
-
-            return false;
+        static int RunConsume(ConsumeOptions options)
+        {
+            return 0;
         }
     }
 }
