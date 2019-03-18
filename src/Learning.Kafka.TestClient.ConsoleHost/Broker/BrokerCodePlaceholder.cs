@@ -12,7 +12,7 @@ namespace Learning.Kafka.TestClient.ConsoleHost.Broker
         private static string _server = "kafka:9092";   // "zookeeper:2181";
         private static string _topicName = "test-topic";
 
-        static void Main(string[] args)
+        static void MainPlaceholder(string[] args)
         {
             if (!TopicExists(_topicName))
                 CreateTopic();
