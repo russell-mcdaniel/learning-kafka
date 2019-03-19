@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Confluent.Kafka;
 using Confluent.Kafka.Admin;
 
-namespace Learning.Kafka.TestClient.ConsoleHost.Broker
+namespace Learning.Kafka.TestClient.ConsoleHost.Processors
 {
     internal class BrokerCodePlaceholder
     {

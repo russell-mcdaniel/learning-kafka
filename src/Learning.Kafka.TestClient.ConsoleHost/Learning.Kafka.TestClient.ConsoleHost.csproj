@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Broker\BrokerCodePlaceholder.cs" />
+    <Compile Remove="Processors\BrokerCodePlaceholder.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Broker\BrokerCodePlaceholder.cs" />
+    <None Include="Processors\BrokerCodePlaceholder.cs" />
   </ItemGroup>
 
   <ItemGroup>

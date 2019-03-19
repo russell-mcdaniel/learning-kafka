@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Learning.Kafka.TestClient.ConsoleHost.Broker
+namespace Learning.Kafka.TestClient.ConsoleHost.Processors
 {
     internal static class ConsumeProcessor
     {
