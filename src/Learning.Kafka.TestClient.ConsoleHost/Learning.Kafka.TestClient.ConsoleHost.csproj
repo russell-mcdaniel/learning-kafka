@@ -19,4 +19,13 @@
     <PackageReference Include="Confluent.Kafka" Version="1.0.0-beta3-ci-880" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Commands\TopicList.cmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Commands\TopicCreate.cmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
