@@ -42,6 +42,12 @@ namespace Learning.Kafka.TestClient.ConsoleHost
         /// </summary>
         [Option('n', "name")]
         public string Name { get; set; }
+
+        [Option('p', "partitions", Default = 1)]
+        public int Partitions { get; set; }
+
+        [Option('r', "replicationfactor", Default = (short)1)]
+        public short ReplicationFactor { get; set; }
     }
 
     [Verb("produce", HelpText = "")]
