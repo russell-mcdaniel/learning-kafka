@@ -46,6 +46,7 @@ namespace Learning.Kafka.TestClient.ConsoleHost.Processors
             {
                 var metadata = client.GetMetadata(_requestTimeout);
 
+                Console.WriteLine();
                 Console.WriteLine("Originating Broker Information");
                 Console.WriteLine();
                 Console.WriteLine($"Broker ID:    {metadata.OriginatingBrokerId}");
@@ -124,6 +125,7 @@ namespace Learning.Kafka.TestClient.ConsoleHost.Processors
             {
                 var metadata = client.GetMetadata(_requestTimeout);
 
+                Console.WriteLine();
                 Console.WriteLine("Originating Broker Information");
                 Console.WriteLine();
                 Console.WriteLine($"Broker ID:          {metadata.OriginatingBrokerId}");
