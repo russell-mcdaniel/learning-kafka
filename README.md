@@ -10,20 +10,33 @@ A learning project for Kafka.
 
 **Steps**
 
-Include service container entries in local [hosts](file://C:\Windows\System32\drivers\etc\hosts) file:
+Include service entries in local [hosts](file://C:\Windows\System32\drivers\etc\hosts) file:
 
 ```
-127.0.0.1               kafka                   # Local Kafka instance
-127.0.0.1               zookeeper               # Local Zookeeper instance
+127.0.0.1               zookeeper               # ZooKeeper (single node)
+127.0.0.1               kafka                   # Kafka (single node)
+
+127.0.0.1               zookeeper-1             # ZooKeeper (cluster)
+127.0.0.1               zookeeper-2             # ZooKeeper (cluster)
+127.0.0.1               zookeeper-3             # ZooKeeper (cluster)
+127.0.0.1               kafka-1                 # Kafka (cluster)
+127.0.0.1               kafka-2                 # Kafka (cluster)
+127.0.0.1               kafka-3                 # Kafka (cluster)
 ```
 
 Clone the repository.
 
-To start a local Kafka broker:
+To start a single-node Kafka instance:
 
 * Open a command prompt.
 * Change to the `/broker` directory.
-* Run `docker-compose up` command.
+* Run `docker-compose --file kafka-single-node.yml up` command.
+
+To start a multi-node Kafka cluster:
+
+* Open a command prompt.
+* Change to the `/broker` directory.
+* Run `docker-compose --file kafka-cluster.yml up` command.
 
 To access Kafka Manager:
 
