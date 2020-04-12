@@ -53,6 +53,8 @@ namespace Learning.Kafka.TestClient.ConsoleHost
     [Verb("produce", HelpText = "")]
     public class ProduceOptions : OptionsBase
     {
+        [Option('t', "topic")]
+        public string Topic { get; set; }
     }
 
     [Verb("consume", HelpText = "")]

@@ -36,3 +36,6 @@ services:
 
 networks:
   kafka-net:
+
+volumes:
+  kafka-1:/d/Docker/Volumes/Kafka-1

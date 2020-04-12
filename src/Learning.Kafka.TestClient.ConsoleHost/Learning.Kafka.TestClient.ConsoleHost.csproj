@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.4.3" />
-    <PackageReference Include="Confluent.Kafka" Version="1.0.0-beta3-ci-880" />
+    <PackageReference Include="Confluent.Kafka" Version="1.0.0-RC3" />
   </ItemGroup>
 
   <ItemGroup>
